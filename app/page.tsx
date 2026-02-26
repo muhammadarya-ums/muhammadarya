@@ -9,7 +9,7 @@ import { Footer } from '@/components/footer'
 
 export default function Home() {
   return (
-    <>
+    <div className="dark bg-background text-foreground">
       <Nav />
       <main className="overflow-hidden">
         <Hero />
@@ -19,13 +19,17 @@ export default function Home() {
         <section id="skills">
           <Skills />
         </section>
-        <Projects />
+        <section id="projects">
+          <Projects />
+        </section>
         <section id="experience">
           <Timeline />
         </section>
-        <Contact />
+        <section id="contact">
+          <Contact />
+        </section>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { OrganicBg } from './organic-bg'
 
 const roles = ['Fullstack Developer', 'AI Enthusiast', 'Informatics Student']
 
@@ -33,109 +34,124 @@ export function Hero() {
   }, [displayText, isDeleting, currentRole])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20 px-4">
-      {/* Islamic Geometric Pattern Background */}
-      <div className="absolute inset-0 opacity-5">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1000 1000"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern id="geometric" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="1" />
-              <path d="M 50 10 L 90 50 L 50 90 L 10 50 Z" fill="none" stroke="currentColor" strokeWidth="1" />
-              <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.5" />
-            </pattern>
-          </defs>
-          <rect width="1000" height="1000" fill="url(#geometric)" />
-        </svg>
-      </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 pb-20 px-4 md:px-8">
+      <OrganicBg />
 
-      <div className="relative z-10 max-w-4xl w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Side: Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <div className="space-y-4">
+              <motion.h1
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-foreground"
+                style={{ fontFamily: 'Sora' }}
+              >
+                Building the <span className="text-primary">future</span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="h-16 flex items-end"
+              >
+                <div className="text-2xl md:text-3xl text-muted-foreground font-medium">
+                  {displayText}
+                  <span className="animate-pulse">|</span>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg text-muted-foreground max-w-md leading-relaxed"
+            >
+              Computer Science student at Universitas Muhammadiyah. Passionate about creating elegant solutions to complex problems through code.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex gap-4 pt-4"
+            >
+              <a
+                href="#projects"
+                className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity"
+              >
+                View My Work
+              </a>
+              <a
+                href="#contact"
+                className="px-8 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
+              >
+                Get In Touch
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side: Visual Element */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="hidden md:flex items-center justify-center"
           >
-            Hello, I'm <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Ahmad</span>
-          </motion.h1>
+            <div className="relative w-full max-w-sm aspect-square">
+              {/* Glassmorphic Card */}
+              <div className="absolute inset-0 rounded-2xl backdrop-blur-xl bg-secondary/20 border border-primary/30 overflow-hidden">
+                <OrganicBg />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center space-y-4 px-8">
+                    <div className="text-5xl font-bold text-primary" style={{ fontFamily: 'Sora' }}>
+                      &lt; /&gt;
+                    </div>
+                    <p className="text-sm text-muted-foreground">Code • Design • Innovation</p>
+                  </div>
+                </div>
+              </div>
 
-          <motion.div
-            className="h-16 mb-8 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <span className="text-2xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400">
-              {displayText}
-              <span className="animate-pulse ml-2">|</span>
-            </span>
+              {/* Floating decorative elements */}
+              <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute top-4 right-4 w-16 h-16 rounded-lg border border-primary/50 bg-primary/5"
+              />
+              <motion.div
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
+                className="absolute bottom-8 left-4 w-12 h-12 rounded-lg border border-primary/30 bg-primary/5"
+              />
+            </div>
           </motion.div>
-
-          <motion.p
-            className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Computer Science student at Universitas Muhammadiyah, passionate about building scalable web applications and exploring AI/ML technologies. Crafting elegant solutions to complex problems.
-          </motion.p>
-
-          <motion.div
-            className="flex gap-4 justify-center flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
-            >
-              View My Work
-            </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 border-2 border-emerald-400 text-emerald-400 rounded-lg font-semibold hover:bg-emerald-400/10 transition-all"
-            >
-              Get in Touch
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-sm text-gray-400">Scroll to explore</span>
-            <svg
-              className="w-6 h-6 text-emerald-400"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </div>
-        </motion.div>
+        </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <div className="text-center space-y-2">
+          <p className="text-sm text-muted-foreground">Scroll to explore</p>
+          <svg
+            className="w-5 h-5 mx-auto text-primary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </motion.div>
     </section>
   )
 }
