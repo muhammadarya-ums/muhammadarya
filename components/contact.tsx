@@ -19,9 +19,16 @@ export function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
+    // Sanitize input: trim whitespace and remove potential XSS characters
+    let sanitizedValue = value.trim()
+    if (name === 'message') {
+      // Allow basic text but remove script-like patterns
+      sanitizedValue = sanitizedValue.replace(/<script[^>]*>.*?<\/script>/gi, '')
+    }
+    
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: sanitizedValue,
     }))
     // Clear error for this field when user starts typing
     if (errors[name as keyof ContactFormInput]) {

@@ -1,11 +1,25 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { ThemeToggle } from './theme-toggle'
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrollOpacity, setScrollOpacity] = useState(0.8)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY
+      // Start with 0.8 opacity, increase to 1 when scrolled
+      const opacity = Math.min(1, 0.8 + scrolled / 100)
+      setScrollOpacity(opacity)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -20,7 +34,12 @@ export function Nav() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-primary/20">
+    <nav 
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-primary/20 transition-all duration-300"
+      style={{ 
+        backgroundColor: `rgba(var(--rgb-background), ${scrollOpacity})`,
+      }}
+    >
       <div className="container mx-auto max-w-6xl px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -39,25 +58,29 @@ export function Nav() {
               <motion.a
                 key={link.name}
                 href={link.href}
-                whileHover={{ color: '#00a859' }}
+                whileHover={{ color: '#1a7a4d' }}
                 className="text-muted-foreground hover:text-primary transition-colors relative group text-sm font-medium"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </motion.a>
             ))}
+            <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            onClick={() => setIsOpen(!isOpen)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6 text-primary" /> : <Menu className="w-6 h-6 text-primary" />}
-          </motion.button>
+          {/* Mobile Menu Button & Theme Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <motion.button
+              onClick={() => setIsOpen(!isOpen)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-2 rounded-lg hover:bg-primary/10 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="w-6 h-6 text-primary" /> : <Menu className="w-6 h-6 text-primary" />}
+            </motion.button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

@@ -39,12 +39,63 @@ export function Hero() {
 
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Right Side: Profile Photo (Mobile - shown first on mobile) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="order-first md:order-last flex justify-center items-center"
+          >
+            <div className="relative w-64 h-64 md:w-72 md:h-72">
+              {/* Organic blob background */}
+              <svg
+                viewBox="0 0 200 200"
+                className="absolute inset-0 w-full h-full text-primary/20"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <filter id="noise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" />
+                  </filter>
+                </defs>
+                <circle cx="100" cy="100" r="80" fill="currentColor" filter="url(#noise)" />
+              </svg>
+
+              {/* Profile image placeholder with hover effect */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-8 rounded-full overflow-hidden border-4 border-primary/30 hover:border-primary/60 transition-colors shadow-2xl"
+              >
+                <motion.div
+                  className="w-full h-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/10 flex items-center justify-center cursor-pointer relative group"
+                  whileHover="hover"
+                >
+                  {/* Placeholder content */}
+                  <div className="text-center">
+                    <div className="text-5xl mb-2">👨‍💻</div>
+                    <p className="text-sm text-foreground/60 font-medium">Your Photo</p>
+                  </div>
+
+                  {/* B&W to Color overlay on hover */}
+                  <motion.div
+                    variants={{
+                      hover: { opacity: 0 },
+                    }}
+                    className="absolute inset-0 bg-black/20 group-hover:opacity-0 transition-all duration-300"
+                  />
+                </motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
+
           {/* Left Side: Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-8 order-last md:order-first"
           >
             <div className="space-y-4">
               <motion.h1

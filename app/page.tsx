@@ -1,6 +1,7 @@
 import { Nav } from '@/components/nav'
 import { Hero } from '@/components/hero'
 import { About } from '@/components/about'
+import { CampusGallery } from '@/components/campus-gallery'
 import { Skills } from '@/components/skills'
 import { Projects } from '@/components/projects'
 import { Timeline } from '@/components/timeline'
@@ -9,12 +10,15 @@ import { Footer } from '@/components/footer'
 
 export default function Home() {
   return (
-    <div className="dark bg-background text-foreground">
+    <div className="bg-background text-foreground">
       <Nav />
       <main className="overflow-hidden">
         <Hero />
         <section id="about">
           <About />
+        </section>
+        <section id="gallery">
+          <CampusGallery />
         </section>
         <section id="skills">
           <Skills />
